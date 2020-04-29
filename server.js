@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 
 // TODO: import mongoose
-
+const mongoose = require("mongoose");
 const apiRoutes = require("./routes/api");
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +18,11 @@ app.use(express.json());
 app.use(express.static("public", { "extensions": "html" }));
 
 // TODO: create mongodb connection with mongoose
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbExample", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 app.use(apiRoutes);
 
