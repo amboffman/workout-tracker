@@ -24,9 +24,17 @@ const WorkoutSchema = new Schema({
       distance: Number
     },
 
-  ]
-  
+  ],
+totalDuration: Number
 })
+
+WorkoutSchema.methods.durationCalc = function(data){
+this.totalDuration = this.aggregate(
+{
+  totalDuration: {$sum: "$exercises.duration"}
+}
+)
+};
 
 const Workout = mongoose.model("workout", WorkoutSchema);
 

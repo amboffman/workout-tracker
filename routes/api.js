@@ -11,8 +11,7 @@ db.Workout.create({})
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-
-  db.Workout.findOneAndUpdate(
+  db.Workout.findByIdAndUpdate(
       req.params.id,{ 
         $push: { exercises: req.body } 
       })
@@ -26,8 +25,15 @@ router.put("/api/workouts/:id", (req, res) => {
 })
 
 router.get("/api/workouts", (req, res) => {
-  db.Workout.find({})
+  db.Workout.aggregate([
+    {
+      $set: {
+        totalDuration: {$sum: "$exercises.duration"}
+      }
+    }
+  ])
   .then((dbWorkout) => {
+
     res.json(dbWorkout);
   })
   .catch((err) => {
