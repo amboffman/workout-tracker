@@ -18,11 +18,12 @@ app.use(express.json());
 app.use(express.static("public", { "extensions": "html" }));
 
 // TODO: create mongodb connection with mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbExample", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
+
 
 app.use(apiRoutes);
 
