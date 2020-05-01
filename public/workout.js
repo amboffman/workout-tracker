@@ -59,7 +59,7 @@ function renderWorkoutSummary(summary) {
     totalDistance: "Total Distance Covered"
   };
 
-  Object.keys(summary).forEach(key => {
+  Object.keys(summary).forEach((key) => {
     const p = document.createElement("p");
     const strong = document.createElement("strong");
 

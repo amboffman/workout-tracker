@@ -41,8 +41,13 @@ router.get("/api/workouts", (req, res) => {
   });
 });
 
-router.get("/api/workouts/range", (req, res) => {});
+router.get("/api/workouts/range", (req, res) => {
+db.Workout.find({})
+.sort({day: -1})
+.limit(7)
+.then((range) => res.json(range))
+.catch((err) => res.json(err))
 
-router.delete("/api/workouts", (req, res) => {});
+});
 
 module.exports = router;
